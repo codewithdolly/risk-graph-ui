@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lineaje Risk Graph </title>
+
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-heatmap.min.js"></script>
+    <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
+    <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
+    <style type="text/css">
+      html, body, #container {
+        width: 90%;
+        height: 90%;
+        margin: 0;
+        padding: 0;
+        margin: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script>
+      anychart.onDocumentReady(function () {
+        // Create Heat Map
+        var chart = anychart.heatMap(getData());
+  
+        // Set chart settings and hover chart settings
+        chart.stroke('#fff');
+        chart
+          .hovered()
+          .stroke('6 #fff')
+          .fill('#545f69')
+          .labels({ fontColor: '#fff' });
+  
+        // Set selection mode for single selection
+        chart.interactivity().selectionMode('none');
+  
+        // Set title
+        chart
+          .title()
+          .enabled(true)
+          .text('Lineaje Risk Graph')
+          .padding([0, 0, 20, 0]);
+  
+        // Set labels
+        var namesList = ['Low', 'Medium', 'High', 'Critical'];
+        chart
+          .labels()
+          .enabled(true)
+          .minFontSize(14)
+          .format(function () {
+            return namesList[this.heat];
+          });
+  
+        // Set Axes
+        chart.yAxis().stroke(null);
+        chart.yAxis().labels().padding([0, 15, 0, 0]);
+        chart.yAxis().ticks(false);
+        chart.xAxis().stroke(null);
+        chart.xAxis().ticks(false);
+  
+        // Set Tooltip
+        chart.tooltip().title().useHtml(true);
+        chart
+          .tooltip()
+          .useHtml(true)
+          .titleFormat(function () {
+            return '<b>' + namesList[this.heat] + '</b> Risk Level';
+          })
+          .format(function () {
+            return (
+              '<span style="color: #CECECE">Risk Level: </span>' +
+              this.x +
+              '<br/>' +
+              '<span style="color: #CECECE">Integrity Level: </span>' +
+              this.y
+            );
+          });
+  
+        // Set container id for the chart
+        chart.container('container');
+        // Initiate chart drawing
+        chart.draw();
+      });
+  
+      function getData() {
+        return [
+          { x: '10.0-9.0', y: 'LCAL4', heat: 3, fill: '#d84315' }, // Red
+          { x: '9.9-7.0', y: 'LCAL4', heat: 3, fill: '#d84315' }, // Red
+          { x: '7.0-4.0', y: 'LCAL4', heat: 2, fill: '#ffb74d' }, // Yellow
+          { x: '4.0-0.0', y: 'LCAL4', heat: 1, fill: '#FFF8DC' }, // Cream
+          { x: '0.0', y: 'LCAL4', heat: 0, fill: '#8BC34A' }, // Green
+  
+          { x: '10.0-9.0', y: 'LCAL3', heat: 3, fill: '#d84315' }, // Red
+          { x: '9.9-7.0', y: 'LCAL3', heat: 2, fill: '#ffb74d' }, // Yellow
+          { x: '7.0-4.0', y: 'LCAL3', heat: 1, fill: '#FFF8DC' }, // Cream
+          { x: '4.0-0.0', y: 'LCAL3', heat: 0, fill: '#8BC34A' }, // Green
+          { x: '0.0', y: 'LCAL3', heat: 0, fill: '#8BC34A' }, // Green
+  
+          { x: '10.0-9.0', y: 'LCAL2', heat: 3, fill: '#d84315' }, // Red
+          { x: '9.9-7.0', y: 'LCAL2', heat: 2, fill: '#ffb74d' }, // Yellow
+          { x: '7.0-4.0', y: 'LCAL2', heat: 1, fill: '#FFF8DC' }, // Cream
+          { x: '4.0-0.0', y: 'LCAL2', heat: 0, fill: '#8BC34A' }, // Green
+          { x: '0.0', y: 'LCAL2', heat: 0, fill: '#8BC34A' }, // Green
+  
+          { x: '10.0-9.0', y: 'LCAL1', heat: 3, fill: '#d84315' }, // Red
+          { x: '9.9-7.0', y: 'LCAL1', heat: 2, fill: '#ffb74d' }, // Yellow
+          { x: '7.0-4.0', y: 'LCAL1', heat: 1, fill: '#FFF8DC' }, // Cream
+          { x: '4.0-0.0', y: 'LCAL1', heat: 0, fill: '#8BC34A' }, // Green
+          { x: '0.0', y: 'LCAL1', heat: 0, fill: '#8BC34A' }, // Green
+        ];
+      }
+    </script>
+  </body>
+  
+  </html>
