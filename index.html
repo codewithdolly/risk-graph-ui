@@ -15,15 +15,58 @@
     <style type="text/css">
       html, body, #container {
         width: 90%;
-        height: 90%;
+        height: 80%;
         padding: 0;
         margin: auto;
         margin-top: 2rem;
       }
+
+.color-legend {
+  display: flex;
+    margin-left: 8rem;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.color-legend p {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.color-box {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    margin-right: 5px;
+    margin-left: 10px;
+}
+
+.critical {
+    background-color: #ff0000;
+}
+
+.high {
+    background-color: #ffbf00;
+}
+
+.medium {
+    background-color: #ffffb3;
+}
+
+.low {
+    background-color: #00802b;
+}
     </style>
   </head>
   <body>
     <div id="container"></div>
+    <div class="color-legend">
+      <p><span class="color-box critical"></span> Critical Risk</p>
+      <p><span class="color-box high"></span> High Risk</p>
+      <p><span class="color-box medium"></span> Medium Risk</p>
+      <p><span class="color-box low"></span> Low Risk</p>
+  </div>
     <script>
       anychart.onDocumentReady(function () {
         // Create Heat Map
