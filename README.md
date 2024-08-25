@@ -1,4 +1,5 @@
-![image](https://github.com/user-attachments/assets/83494dee-ebd6-4172-9c03-0e5f50aebe04)
+![image](https://github.com/user-attachments/assets/816bfd41-2a47-4563-a606-ef2a521c88cd)
+
 
 # Overview
 This documentation explains how to create a heatmap chart using AnyChart and customize its appearance using CSS. 
