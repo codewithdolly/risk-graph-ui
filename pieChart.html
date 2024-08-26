@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pie Chart - Risk Distribution</title>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+    <style type="text/css">
+      html, body, #container {
+        width: 90%;
+        height: 80%;
+        padding: 0;
+        margin: auto;
+        margin-top: 4%;
+      }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <script>
+        anychart.onDocumentReady(function () {
+            // Create Pie Chart
+            var data = getDataForPieChart();
+            var chart = anychart.pie();
+
+            chart.data(data);
+            
+            // Set chart title
+            chart.title("Risk Distribution - Pie Chart");
+
+            // Set container id for the chart
+            chart.container('container');
+            // Initiate chart drawing
+            chart.draw();
+        });
+
+        function getDataForPieChart() {
+            return [
+                {x: "Critical Risk", value: 8},
+                {x: "High Risk", value: 5},
+                {x: "Medium Risk", value: 4},
+                {x: "Low Risk", value: 8}
+            ];
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lineaje Risk Column Chart</title>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+    <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
+    <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
+    <style type="text/css">
+        html, body, #container {
+            width: 90%;
+            height: 80%;
+            padding: 0;
+            margin: auto;
+            margin-top: 3rem;
+        }
+        .color-legend {
+            display: flex;
+            margin-left: 8rem;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        .color-legend p {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        .color-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+            margin-right: 5px;
+            margin-left: 10px;
+        }
+        .critical {
+            background-color: #ff0000;
+        }
+        .high {
+            background-color: #ffbf00;
+        }
+        .medium {
+            background-color: #ffffb3;
+        }
+        .low {
+            background-color: #00802b;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <div class="color-legend">
+        <p><span class="color-box critical"></span> Critical Risk</p>
+        <p><span class="color-box high"></span> High Risk</p>
+        <p><span class="color-box medium"></span> Medium Risk</p>
+        <p><span class="color-box low"></span> Low Risk</p>
+    </div>
+    <script>
+        anychart.onDocumentReady(function () {
+            // Create Column Chart
+            var chart = anychart.column();
+
+            // Set chart settings
+            chart.title("Lineaje Risk Column Chart");
+            chart.yScale().minimum(0);
+            chart.xAxis().title("Integrity Level");
+            chart.yAxis().title("Risk Level");
+
+            // Set colors
+            chart.palette(["#ff0000", "#ffbf00", "#ffffb3", "#00802b"]);
+
+            // Data for each risk level
+            var data = [
+                ['LCAL1', 10, 5, 2, 1],
+                ['LCAL2', 9, 6, 4, 3],
+                ['LCAL3', 8, 7, 5, 4],
+                ['LCAL4', 7, 6, 4, 3],
+                ['LCAL5', 6, 5, 4, 2],
+                ['LCAL6', 5, 4, 3, 2],
+                ['LCAL7', 4, 3, 2, 1],
+            ];
+
+            // Set series for each risk level
+            chart.column(data.map(function(item) { return {x: item[0], value: item[1]}; })).name("Critical Risk");
+            chart.column(data.map(function(item) { return {x: item[0], value: item[2]}; })).name("High Risk");
+            chart.column(data.map(function(item) { return {x: item[0], value: item[3]}; })).name("Medium Risk");
+            chart.column(data.map(function(item) { return {x: item[0], value: item[4]}; })).name("Low Risk");
+
+            // Set tooltip
+            chart.tooltip().titleFormat("{%SeriesName}");
+            chart.tooltip().format("Integrity Level: {%X}\nRisk: {%Value}");
+
+            // Draw the chart
+            chart.container("container");
+            chart.draw();
+        });
+    </script>
+</body>
+</html>

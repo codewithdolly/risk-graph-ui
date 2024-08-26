@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Chart - Risk Levels</title>
+    <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+    <style type="text/css">
+      html, body, #container {
+        width: 90%;
+        height: 80%;
+        padding: 0;
+        margin: auto;
+        margin-top: 4%;
+      }
+      #container{
+        border: 2px, solid gray;
+      }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <script>
+        anychart.onDocumentReady(function () {
+            // Create Bar Chart
+            var data = anychart.data.set([
+                ['LCAL4', 3, 3, 2, 1, 0],
+                ['LCAL3', 3, 2, 1, 0, 0],
+                ['LCAL2', 3, 2, 1, 0, 0],
+                ['LCAL1', 3, 2, 1, 0, 0]
+            ]);
+
+            var seriesData = [
+                data.mapAs({x: 0, value: 1}),
+                data.mapAs({x: 0, value: 2}),
+                data.mapAs({x: 0, value: 3}),
+                data.mapAs({x: 0, value: 4}),
+                data.mapAs({x: 0, value: 5}),
+            ];
+
+            var chart = anychart.bar();
+
+            // Set the series data and color
+            var colors = ['#ff0000', '#ffbf00', '#ffffb3', '#00cc00', '#00802b'];
+            var riskLabels = ['10.0-9.0', '9.9-7.0', '7.0-4.0', '4.0-0.0', '0.0'];
+
+            for (var i = 0; i < seriesData.length; i++) {
+                chart.bar(seriesData[i])
+                     .name(riskLabels[i])
+                     .color(colors[i]);
+            }
+
+            // Set chart title
+            chart.title("Risk Levels - Bar Chart");
+
+            // Customize axes
+            chart.xAxis().title("Integrity Level");
+            chart.yAxis().title("Risk Level");
+
+            // Set container id for the chart
+            chart.container('container');
+            // Initiate chart drawing
+            chart.draw();
+        });
+    </script>
+</body>
+</html>
